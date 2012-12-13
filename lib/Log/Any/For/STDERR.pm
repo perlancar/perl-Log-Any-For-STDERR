@@ -15,8 +15,8 @@ my $log = Log::Any->get_logger(category => 'STDERR');
 sub _handler {
     my $msg = shift;
 
-    $log->warn($Prefix . $msg);
     print $orig_stderr $msg;
+    $log->warn($Prefix . $msg);
 }
 
 sub import {
@@ -44,10 +44,12 @@ sub unimport {
 
 =head1 DESCRIPTION
 
-NOTE: This module is deprecated because when using this module, logging with
-adapters that log to screen (STDERR) becomes problematic, because the output of
-that adapter will then be logged again by this module, and you see the problem
-with that :-)
+NOTE: This module is deprecated because log adapters like
+L<Log::Any::Adapter::ScreenColoredLevel> also outputs to STDERR which prevents
+this module from working properly. To trap warnings and error messages from
+Perl, you can instead try installing a C<$SIG{__WARN__}> and C<$SIG{__DIE__}>
+handler. To capture all STDERR output (including from external programs), you
+might want to wrap your Perl script and redirect its output.
 
 This module will send output of STDERR to Log::Any. Messages are logged at
 C<warn> level in category C<STDERR>. Messages produced by warn() and print(),
@@ -72,7 +74,8 @@ C<LOG_STDERR_PREFIX> - Can be used to set C<$Prefix>.
 
 =head1 SEE ALSO
 
-Of course, L<Log::Any>.
+Of course, L<Log::Any>. See also L<Log::Any::App> which provides an easy way to
+send your logs to various outputs.
 
 To log other stuffs to Log::Any (besides the normal way of C<< $log->debug() >>
 et al, that is), see various other Log::Any::For::* modules.
