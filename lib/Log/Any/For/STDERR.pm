@@ -31,7 +31,7 @@ sub unimport {
 }
 
 1;
-# ABSTRACT: Send output of STDERR to Log::Any
+# ABSTRACT: (DEPRECATED) Send output of STDERR to Log::Any
 
 =for Pod::Coverage ^(import|unimport)$
 
@@ -43,6 +43,11 @@ sub unimport {
 
 
 =head1 DESCRIPTION
+
+NOTE: This module is deprecated because when using this module, logging with
+adapters that log to screen (STDERR) becomes problematic, because the output of
+that adapter will then be logged again by this module, and you see the problem
+with that :-)
 
 This module will send output of STDERR to Log::Any. Messages are logged at
 C<warn> level in category C<STDERR>. Messages produced by warn() and print(),
@@ -62,10 +67,12 @@ prepend before each output of STDERR.
 C<LOG_STDERR_PREFIX> - Can be used to set C<$Prefix>.
 
 
+=head1 FAQ
+
+
 =head1 SEE ALSO
 
-Of course, L<Log::Any>. Also see L<Log::Any::App> which provides an easy,
-minimal-configuration way to display your logs.
+Of course, L<Log::Any>.
 
 To log other stuffs to Log::Any (besides the normal way of C<< $log->debug() >>
 et al, that is), see various other Log::Any::For::* modules.
