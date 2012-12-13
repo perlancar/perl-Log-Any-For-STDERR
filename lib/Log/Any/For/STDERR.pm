@@ -33,6 +33,8 @@ sub unimport {
 1;
 # ABSTRACT: Send output of STDERR to Log::Any
 
+=for Pod::Coverage ^(import|unimport)$
+
 =head1 SYNOPSIS
 
  use Log::Any::For::STDERR;
