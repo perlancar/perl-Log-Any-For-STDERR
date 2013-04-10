@@ -49,7 +49,8 @@ L<Log::Any::Adapter::ScreenColoredLevel> also outputs to STDERR which prevents
 this module from working properly. To trap warnings and error messages from
 Perl, you can instead try installing a C<$SIG{__WARN__}> and C<$SIG{__DIE__}>
 handler. To capture all STDERR output (including from external programs), you
-might want to wrap your Perl script and redirect its output.
+might want to wrap your Perl script and redirect its output; try
+L<Process::Govern>.
 
 This module will send output of STDERR to Log::Any. Messages are logged at
 C<warn> level in category C<STDERR>. Messages produced by warn() and print(),
@@ -81,6 +82,8 @@ To log other stuffs to Log::Any (besides the normal way of C<< $log->debug() >>
 et al, that is), see various other Log::Any::For::* modules.
 
 To capture STDERR there are various ways, including those that utilizes fork and
-can capture output of external programs. For example, see L<Capture::Tiny>.
+can capture output of external programs. For example, see L<Capture::Tiny>. Also
+see L<Process::Govern> which, aside from capturing output, also governs other
+aspects of child process.
 
 =cut
